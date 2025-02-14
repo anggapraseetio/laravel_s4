@@ -4,9 +4,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-}); 
+});  
 
-Route::get('foo', function () {
+Route::get('/foo', function () {
     return view('Hello Word');
 });
 
