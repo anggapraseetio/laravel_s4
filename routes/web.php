@@ -37,14 +37,14 @@ Route::get('/blog/{$id}', function(Request $request){
 
 //named route
 //redirect ke halaman lain
-Route::get('/blog', function () {
-    $profil = "aku seorang programmer";
-    return view('word', ['data'=> $profil ]);
-})->name('redir');
+// Route::get('/blog', function () {
+//     $profil = "aku seorang programmer";
+//     return view('word', ['data'=> $profil ]);
+// })->name('redir');
 
-Route::get('/blog/{$id}', function(Request $request){
-    Route::redirect()->route('redir');
-});
+// Route::get('/blog/{$id}', function(Request $request){
+//     Route::redirect()->route('redir');
+// });
 
 //controlller
 Route::get('/a', [Acontroller::class, 'index']);
