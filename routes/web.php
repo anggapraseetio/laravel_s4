@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Acontroller;
+use App\Http\Controllers\ProfileController; 
 use Illuminate\Support\Facades\Route;
 
 //route dasar menampilkan view
@@ -106,3 +107,6 @@ Route::get('/home', function () {
 Route::get('/login', function () {
     return 'ANDA BELUM LOGIN';
 })->name('login');
+
+//Controller
+Route::get('/profil', [ProfileController::class, 'index']);
