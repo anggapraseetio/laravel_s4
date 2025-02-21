@@ -2,7 +2,8 @@
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Acontroller;
-use App\Http\Controllers\ProfileController; 
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\frontend\HomeController;  
 use Illuminate\Support\Facades\Route;
 
 //route dasar menampilkan view
@@ -116,3 +117,9 @@ Route::get('/dashboard', [ProfileController::class, 'index']);
 // Route::get("/dashboard", function(){
 //     return view('dashboard');
 // });
+
+Route::resource('/acara7', HomeController::class);
+
+Route::get('/cobalagi', function() {
+    return view('frontend.home');
+});
