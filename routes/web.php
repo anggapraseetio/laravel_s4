@@ -102,7 +102,7 @@ Route::group(['prefix' => '/mahasiswa', 'as' => 'mhs.', 'middleware'=>"auth"],fu
     })->name('nilai');
 });
 
-Route::get('/home', function () {
+Route::get('/hom', function () {
     return view('home');
 }); 
 
@@ -125,3 +125,9 @@ Route::get('/acara7', function() {
 
 Route::resource('/acara8', DashboardController::class);
 
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
