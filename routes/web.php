@@ -5,6 +5,7 @@ use App\Http\Controllers\Acontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\frontend\HomeController;  
 use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\PengalamanKerjaController;
 use Illuminate\Support\Facades\Route;
 
 //route dasar menampilkan view
@@ -131,3 +132,9 @@ Route::resource('/acara8', DashboardController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['namespace' => 'App\Http\Controllers\backend'], function(){
+    Route::resource('dashboard', 'DashboardController');
+    Route::resource('pendidikan', 'PendidikanController');
+    Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
+});
