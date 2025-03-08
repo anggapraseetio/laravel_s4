@@ -22,7 +22,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ url('pengalaman_kerja') }}">
+                    <a href="{{ 'pengalaman_kerja' }}">
                         <i class="bi bi-circle"></i><span>Pengalaman Kerja</span>
                     </a>
                 </li>

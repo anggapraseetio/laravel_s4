@@ -28,7 +28,7 @@ class PengalamanKerjaController extends Controller
     }
     public function edit($id){
         $pengalaman_kerja = DB::table('pengalaman_kerja')->where('id',$id)->first();
-        return view('backend.pengalaman_kerja.create', compact('penglaman_kerja'));
+        return view('backend.pengalaman_kerja.create', compact('pengalaman_kerja'));
     }
     public function update(Request $request){
         DB::table('pengalaman_kerja')->where('id',$request->id)->update([
@@ -39,7 +39,7 @@ class PengalamanKerjaController extends Controller
         ]);
         return redirect()->route('pengalaman_kerja.index')->with('succes', 'pengalaman kerja berhasil diperbarui');
     }
-    public function distroy($id){
+    public function destroy($id){
         DB::table('pengalaman_kerja')->where('id',$id)->delete();
         return redirect()->route('pengalaman_kerja.index')->with('succes di hapus');
     }

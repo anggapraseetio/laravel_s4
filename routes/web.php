@@ -4,8 +4,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Acontroller;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\frontend\HomeController;  
-use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
+use App\Http\Controllers\Backend\PendidikanController;
 use Illuminate\Support\Facades\Route;
 
 //route dasar menampilkan view
@@ -138,6 +139,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 //     Route::resource('pendidikan', 'PendidikanController');
 //     Route::resource('pengalaman_kerja', 'PengalamanKerjaController');
 // });
-Route::prefix('backend')->group(function () {
-    Route::resource('pengalaman_kerja', PengalamanKerjaController::class);
+    //ACARA 13-16
+    Route::group(['namespace' => 'App\Http\Controllers\Backend'], function()  
+{  
+    Route::resource('dash', DashboardController::class);  
+    Route::resource('/pendidikan', PendidikanController::class);  
+    Route::resource('/pengalaman_kerja', PengalamanKerjaController::class);  
 });
