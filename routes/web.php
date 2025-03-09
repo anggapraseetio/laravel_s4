@@ -7,6 +7,9 @@ use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\PengalamanKerjaController;
 use App\Http\Controllers\Backend\PendidikanController;
+use App\Http\Controllers\SessionController;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\CobaController;
 use Illuminate\Support\Facades\Route;
 
 //route dasar menampilkan view
@@ -146,3 +149,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
     Route::resource('/pendidikan', PendidikanController::class);  
     Route::resource('/pengalaman_kerja', PengalamanKerjaController::class);  
 });
+
+//acara 17 dan 18
+Route::get('/session/create', [SessionController::class, 'create']);
+Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
+Route::get('/formulir', [PegawaiController::class, 'formulir']);
+Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
+//Route::get('/cobaerror', [CobaController::class, 'index']);
+Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
+
