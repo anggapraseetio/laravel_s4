@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use File;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManager;
 
 
 class UploadController extends Controller
@@ -14,8 +14,13 @@ class UploadController extends Controller
     }
     public function proses_upload(Request $request){
         $this->validate($request, [
-            'file' => 'required',
+            'file' => 'required|mimes:jpg,jpeg,png,gif|max:2048',
             'keterangan' => 'required',
+        ],[
+            'file.required' => 'File gambar wajib diunggah.',
+            'file.mimes' => 'Format file harus jpg, jpeg, png, atau gif.',
+            'file.max' => 'Ukuran file maksimal 2MB.',
+            'keterangan.required' => 'Keterangan wajib diisi.'
         ]);
         //menyimpan data file yang diupload ke variabel $file
         $file = $request->file('file');
@@ -30,50 +35,42 @@ class UploadController extends Controller
         //tipe mime
         echo 'File Mime Type: '.$file->getMimeType();
         //isi dengan nama folder tempa kemana file diupload
-        $foto = 'data_file';
+        $tujuan_upload = 'data_file';
         //upload file
-        $file->move($foto, $file->getClientOriginalName());
+        $file->move($tujuan_upload, $file->getClientOriginalName());
+        return back()->with('success', 'File berhasil diupload!');
     }
 
-    public function resize_upload(Request $request)
+    public function resize_upload(Request $request, ImageManager $imageManager)
     {
-        $this->validate($request, [
-            'file' => 'required',
+        $request->validate([
+            'file' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
             'keterangan' => 'required',
         ]);
 
-        // TENTUKAN PATH LOKASI UPLOAD
-        $path = public_path('foto');
+        // Tentukan path lokasi upload
+        $path = public_path('img/logo');
 
-        // JIKA FOLDERNYA BELUM ADA
+        // Jika folder belum ada, buat foldernya
         if (!File::isDirectory($path)) {
-            // MAKA FOLDER TERSEBUT AKAN DIBUAT
             File::makeDirectory($path, 0777, true);
         }
 
-        // MENGAMBIL FILE IMAGE DARI FORM
+        // Ambil file dari form
         $file = $request->file('file');
 
-        // MEMBUAT NAME FILE DARI GABUNGAN TANGGAL DAN UNIQID()
+        // Buat nama file unik
         $fileName = 'logo_' . uniqid() . '.' . $file->getClientOriginalExtension();
 
-        // MEMBUAT CANVAS IMAGE SEBESAR DIMENSI
-        $canvas = Image::canvas(200, 200);
+        // Baca gambar menggunakan ImageManager
+        $image = $imageManager->read($file->getRealPath());
 
-        // RESIZE IMAGE SESUAI DIMENSI DENGAN MEMPERTAHANKAN RATIO
-        $resizeImage = Image::make($file)->resize(null, 200, function ($constraint) {
-            $constraint->aspectRatio();
-        });
+        $resizedImage = $image->cover(200, 200);
 
-        // MEMASUKAN IMAGE YANG TELAH DIRESIZE KE DALAM CANVAS
-        $canvas->insert($resizeImage, 'center');
+        // Simpan hasil gambar ke folder
+        file_put_contents($path . '/' . $fileName, $resizedImage->toJpeg());
 
-        // SIMPAN IMAGE KE FOLDER
-        if ($canvas->save($path . '/' . $fileName)) {
-            return redirect(route('upload'))->with('success', 'Data berhasil ditambahkan(resize)! ');
-        } else {
-            return redirect(route('upload'))->with('error', 'Data gagal ditambahkan!');
-        }
+        return redirect(route('upload.resize'))->with('success', 'Data berhasil ditambahkan!');
     }
     
 }
