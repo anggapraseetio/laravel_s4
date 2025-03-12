@@ -13,6 +13,7 @@ use App\Http\Controllers\CobaController;
 use App\Http\Controllers\UploadController;
 use Illuminate\Support\Facades\Route;
 
+
 //route dasar menampilkan view
 Route::get('/', function () {
     return view('welcome');
@@ -169,3 +170,4 @@ Route::get('/dropzone', [UploadController::class, 'dropzone'])->name('dropzone')
 Route::post('/dropzone/store', [UploadController::class, 'dropzone_store'])->name('dropzone.store');
 Route::get('/pdf_upload', [UploadController::class, 'pdf_upload'])->name('pdf.upload');
 Route::post('/pdf/store', [UploadController::class, 'pdf_store'])->name('pdf.store');
+
