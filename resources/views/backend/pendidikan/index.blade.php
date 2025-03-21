@@ -7,9 +7,9 @@
                 <div class="col-lg-12">
                     <h3 class="page-header"><i class="icon_document_alt"></i> Riwayat Hidup</h3>
                     <ol class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href="{{ url('dashboard') }}">Home</a></li>
-                        <li><i class="icon_document_alt"></i>Riwayat Hidup</li>
-                        <li class="fa fa-files-o">Pendidikan</li>
+                        <li><i class="fa fa-home"></i><a href="{{ url('dashboard') }}">Home/</a></li>
+                        <li><i class="icon_document_alt"></i>Riwayat Hidup/</li>
+                        <li><i class="fa fa-files-o"></i>Pendidikan</li>
                     </ol>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                                             <td>
                                                 <a href="{{ route('pendidikan.edit', $item->id) }}"
                                                     class="btn btn-warning btn-sm">
-                                                    <i class="fa fa-edit"></i> Edit
+                                                    <i class="fa fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('pendidikan.destroy', $item->id) }}" method="POST"
                                                     style="display:inline;">
@@ -83,7 +83,7 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"
                                                         onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-                                                        <i class="fa fa-trash"></i> Hapus
+                                                        <i class="fa fa-trash"></i>
                                                     </button>
                                                 </form>
                                             </td>

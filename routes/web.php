@@ -126,34 +126,34 @@ Route::get('/dashboard', [ProfileController::class, 'index']);
 //     return view('dashboard');
 // });
 
+//acara 7
 Route::get('/acara7', function() {
     return view('frontend.home');
 });
 
+//acara 8
 Route::resource('/acara8', DashboardController::class);
 
+//acara 9 dan 10 membuat database
 
-
-
+//acara 11
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::group(['namespace' => 'App\Http\Controllers\Backend'], function(){
-//     Route::resource('dashboard', 'DashboardController');
-//     Route::resource('pendidikan', 'PendidikanController');
-//     Route::resource('pengalaman_kerja', 'PengalamanKerjaController');
-// });
-    //ACARA 13-16
+//acara 12 pengenalan middelware
+
+    //acara 13-16
     Route::group(['namespace' => 'App\Http\Controllers\Backend'], function()  
 {  
-    Route::resource('dash', DashboardController::class);  
+    Route::resource('/dash', DashboardController::class);  
     Route::resource('/pendidikan', PendidikanController::class);  
     Route::resource('/pengalaman_kerja', PengalamanKerjaController::class);  
 });
 
 //acara 17 dan 18
 Route::get('/session/create', [SessionController::class, 'create']);
+Route::get('/session/show', [SessionController::class, 'show']);
+Route::get('/session/delete', [SessionController::class, 'delete']);
 Route::get('/pegawai/{nama}', [PegawaiController::class, 'index']);
 Route::get('/formulir', [PegawaiController::class, 'formulir']);
 Route::post('/formulir/proses', [PegawaiController::class, 'proses']);
@@ -163,7 +163,9 @@ Route::get('/cobaerror/{nama?}', [CobaController::class, 'index']);
 //acara 19
 Route::get('/upload', [UploadController::class, 'upload'])->name('upload');
 Route::post('/upload/proses', [UploadController::class, 'proses_upload'])->name('upload.proses');
-Route::post('/upload/resize', [UploadController::class, 'resize_upload'])->name('upload.resize');
+
+Route::get('/upload/resize', [UploadController::class, 'resize'])->name('upload.resize');
+Route::post('/upload/resize/proses', [UploadController::class, 'proses_upload_resize'])->name('upload.proses.resize');
 
 //acara 20
 Route::get('/dropzone', [UploadController::class, 'dropzone'])->name('dropzone');

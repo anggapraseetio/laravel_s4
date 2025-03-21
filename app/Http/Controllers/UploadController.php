@@ -40,8 +40,11 @@ class UploadController extends Controller
         $file->move($tujuan_upload, $file->getClientOriginalName());
         return back()->with('success', 'File berhasil diupload!');
     }
+    public function resize(){
+        return view('upload_resize');
+    }
 
-    public function resize_upload(Request $request, ImageManager $imageManager)
+    public function proses_upload_resize(Request $request, ImageManager $imageManager)
     {
         $request->validate([
             'file' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
@@ -70,7 +73,7 @@ class UploadController extends Controller
         // Simpan hasil gambar ke folder
         file_put_contents($path . '/' . $fileName, $resizedImage->toJpeg());
 
-        return redirect(route('upload.resize'))->with('success', 'Data berhasil ditambahkan!');
+        return redirect(route('upload'))->with('success', 'Data berhasil ditambahkan!');
     }
     public function dropzone(){
         return view('dropzone');

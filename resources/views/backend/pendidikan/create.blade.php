@@ -7,8 +7,8 @@
                 <div class="col-lg-12">
                     <h3 class="page-header"><i class="icon_document_alt"></i> Tambah Data Pendidikan</h3>
                     <ol class="breadcrumb">
-                        <li><i class="fa fa-home"></i><a href="{{ route('dash.index') }}">Home</a></li>
-                        <li><i class="icon_document_alt"></i>Riwayat Hidup</li>
+                        <li><i class="fa fa-home"></i><a href="{{ route('dash.index') }}">Home/</a></li>
+                        <li><i class="icon_document_alt"></i>Riwayat Hidup/</li>
                         <li><i class="fa fa-files-o"></i>Pendidikan</li>
                     </ol>
                 </div>
